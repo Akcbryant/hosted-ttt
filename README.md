@@ -1,14 +1,16 @@
 # hosted-ttt
 
-A Clojure library designed to ... well, that part is up to you.
+This game of tic-tac-toe will start up a [javaserver](https://github.com/Akcbryant/javaserver "github.com/Akcbryant/javaserver") on port 5000. At this point you can navigate to localhost:5000
+and have a go at some tic-tac-toe!
+
+The tic-tac-toe uses minimax to play against you. You can check it out [here](https://github.com/Akcbryant/clojure-ttt "github.com/Akcbryant/clojure-ttt").
 
 ## Usage
 
-FIXME
+Make sure you have [Leiningen](http://leiningen.org/) installed!
 
-## License
+Grab this project, navigate to its directory, and use ```lein run``` to start up the server.
 
-Copyright © 2016 FIXME
+Navigate to localhost:5000 and there you have it!
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+```Lein test``` will run all of the tests as well!
