@@ -16,6 +16,13 @@
     <input type=\"submit\" value=\"New Game?\">
   </form>")
 
+(def new-game-html
+  "<form action=\"/game\" method=\"get\">
+    <input type=\"submit\" value=\"New Game?\">
+  </form>")
+
+(def cheating-message "You cheated!")
+
 (defn form-start-html [board players]
   (str
     "<form action=\"/game\" method=\"post\">
@@ -48,19 +55,19 @@
        "</tr>
      </table>"))
 
-(defn- winner-message-html [board move players]
-  (if (and (= "X" (board/winner board)) (= 1 players))
-    "You cheated"
-    (str "Good job " (board/winner board) "!"
-         "<form action=\"/game\" method=\"get\">
-            <input type=\"submit\" value=\"New Game?\">
-          </form>")))
+(defn- is-cheating? [board players human-piece]
+  (and (= human-piece (board/winner board)) (= 1 players)))
+
+(defn winner-message-html [board players]
+  (if (is-cheating? board players "X")
+    cheating-message
+    (str "Good job " (board/winner board) "!" new-game-html)))
 
 (defn build-view [board move players]
   (let [form-start-html (form-start-html board players)
         board-html (board-html board)]
     (if-let [winner (board/winner board)]
-      (str header (winner-message-html board move players))
+      (str header (winner-message-html board players))
       (if (board/game-ended? board)
         (str header tie-html)
         (str header form-start-html board-html close-form-div)))))
